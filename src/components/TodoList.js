@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import TodoForm from "./TodoForm";
-import Todo from "./Todo"
+import Todo from "./Todo";
 
-function TodoList() {
+const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
@@ -14,16 +14,18 @@ function TodoList() {
   };
 
   const updateTodo = (todoId, newValue) => {
-      if(!newValue.text || /^\s*$/.test(newValue.text)) {
-          return
-      }
-      setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
-  }
+    if (!newValue.text || /^\s*$/.test(newValue.text)) {
+      return;
+    }
+    setTodos((prev) =>
+      prev.map((item) => (item.id === todoId ? newValue : item))
+    );
+  };
 
-  const removeTodo = id => {
-      const removeArr = [...todos].filter(todo => todo.id !== id)
-      setTodos(removeArr)
-  }
+  const removeTodo = (id) => {
+    const removeArr = [...todos].filter((todo) => todo.id !== id);
+    setTodos(removeArr);
+  };
 
   const completeTodo = (id) => {
     let updateTodos = todos.map((todo) => {
@@ -36,10 +38,17 @@ function TodoList() {
   };
 
   return (
-    <div>
-      <h1>What's the Plan for Today?</h1>
+    <div className="todo-app">
+      <h1>To Do List</h1>
+      <div>
+        <Todo 
+          todos={todos}
+          completeTodo={completeTodo}
+          removeTodo={removeTodo}
+          updateTodo={updateTodo}
+        />
+      </div>
       <TodoForm onSubmit={addTodo} />
-      <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo}/>
     </div>
   );
 }
