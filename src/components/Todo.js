@@ -9,27 +9,33 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
   });
 
   const submitUpdate = (e) => {
-    e.preventDefault()
-    updateTodo(edit.id, edit.text)
+    e.preventDefault();
+    updateTodo(edit.id, edit.text);
 
     setEdit({
-      id : null,
-      text: ""
-    })
+      id: null,
+      text: "",
+    });
   };
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setEdit({
       id: edit.id,
-      text: e.target.value
-    })
-  }
+      text: e.target.value,
+    });
+  };
 
   if (edit.id) {
     return (
       <form className="update-form" onSubmit={submitUpdate}>
-        <input className="todo-row update-input" type="text" onChange={handleChange} />
-        <button className="update-btn" type="submit">Update</button>
+        <input
+          className="todo-row update-input"
+          type="text"
+          onChange={handleChange}
+        />
+        <button className="update-btn" type="submit">
+          Update
+        </button>
       </form>
     );
   }

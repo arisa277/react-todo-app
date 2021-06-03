@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 const TodoForm = (props) => {
   const [input, setInput] = useState("");
