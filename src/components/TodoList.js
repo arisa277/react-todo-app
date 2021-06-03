@@ -14,12 +14,19 @@ const TodoList = () => {
   };
 
   const updateTodo = (todoId, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
-      return;
-    }
-    setTodos((prev) =>
-      prev.map((item) => (item.id === todoId ? newValue : item))
-    );
+    // if (!newValue.text || /^\s*$/.test(newValue.text)) {
+    //   return;
+    // }
+    // setTodos((prev) =>
+    //   prev.map((item) => (item.id === todoId ? newValue : item))
+    // );
+    let update =todos.map(todo => {
+      if(todo.id === todoId) {
+        todo.text = newValue
+      }
+      return todo
+    })
+    setTodos(update)
   };
 
   const removeTodo = (id) => {

@@ -1,45 +1,59 @@
 import React, { useState } from "react";
-import TodoForm from "./TodoForm";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
 const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
   const [edit, setEdit] = useState({
     id: null,
-    value: "",
+    text: "",
   });
 
-  const submitUpdate = value => {
-      updateTodo(edit.id, value)
-      setEdit({
-          id: null,
-          value: ''
-      })
+  const submitUpdate = (e) => {
+    e.preventDefault()
+    updateTodo(edit.id, edit.text)
+
+    setEdit({
+      id : null,
+      text: ""
+    })
+  };
+
+  const handleChange = e => {
+    setEdit({
+      id: edit.id,
+      text: e.target.value
+    })
   }
 
-  if(edit.id) {
-      return (
-        <input className="todo-row update-form"/>
-        )
-      // return <TodoForm edit={edit} onSubmit={submitUpdate} />
+  if (edit.id) {
+    return (
+      <form className="update-form" onSubmit={submitUpdate}>
+        <input className="todo-row update-input" type="text" onChange={handleChange} />
+        <button className="update-btn" type="submit">Update</button>
+      </form>
+    );
   }
 
   return todos.map((todo, index) => (
     <div
-      className={todo.isComplete ? 'todo-row complete' : 'todo-row'}
+      className={todo.isComplete ? "todo-row complete" : "todo-row"}
       key={index}
     >
-      <div className="cursor" key={todo.id} onClick={() => completeTodo(todo.id)}>
+      <div
+        className="cursor"
+        key={todo.id}
+        onClick={() => completeTodo(todo.id)}
+      >
         {todo.text}
       </div>
-      <div className='icons'>
+      <div className="icons">
         <TiEdit
-          onClick={() => setEdit({ id: todo.id, value: todo.text })}
-          className='edit-icon'
+          onClick={() => setEdit({ id: todo.id, text: todo.text })}
+          className="edit-icon"
         />
         <RiCloseCircleLine
           onClick={() => removeTodo(todo.id)}
-          className='delete-icon'
+          className="delete-icon"
         />
       </div>
     </div>
