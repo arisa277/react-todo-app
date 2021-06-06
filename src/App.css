@@ -26,7 +26,7 @@ body {
   margin-top: 10px;
   overflow: hidden;
   display: grid;
-  height: 90%;
+  height: 100%;
   grid-template-rows: auto 1fr auto;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
